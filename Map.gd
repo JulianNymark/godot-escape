@@ -48,3 +48,15 @@ func instantiateTerrain(terrainBlueprint):
 				node = NoTexture.instance()
 			node.position = Vector2(x, y) * CONSTANTS.GRID_SIZE
 			self.add_child(node)
+
+func isImpassable(terrainString) -> bool:
+	if terrainString == "Rock":
+		return true
+	return false
+
+func isOutOfBounds(idx: Vector2) -> bool:
+	if idx.x < 0 or idx.x >= self.DIM.x:
+		return true
+	if idx.y < 0 or idx.y >= self.DIM.y:
+		return true
+	return false
