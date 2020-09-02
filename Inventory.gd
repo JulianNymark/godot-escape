@@ -10,8 +10,13 @@ func addItem(item):
 		print("inventory full")
 		return
 	
-	items.append(item)
 	var button = TextureButton.new()
 	button.texture_normal = item.textureToSet
-	item.inventoryButton = button # WIP for easier removal from GUI later?
+		
+	var metaItem = {
+		"item" : item, # ref to "real" item in world (Node2D)
+		"button" : button, # ref to alter / remove GUI button
+	}
+	
+	items.append(metaItem) # internal data ref
 	self.add_child(button) # render in GUI

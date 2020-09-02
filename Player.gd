@@ -25,7 +25,7 @@ func handleAnimation(direction):
 	elif (direction == Cardinals.N):
 		animationPlayer.play("WalkNorth");
 
-func InputHandler() -> Vector2:
+func MoveHandler() -> Vector2:
 	velocity = Vector2(0, 0)
 	if (Input.is_action_just_pressed("ui_up")):
 		facing = Cardinals.N
@@ -42,3 +42,5 @@ func InputHandler() -> Vector2:
 	
 	return velocity
 	
+func DEBUG_SpawnHandler():
+	return Input.is_action_just_pressed("key_s")

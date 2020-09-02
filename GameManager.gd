@@ -13,13 +13,29 @@ onready var Items = $World/Items
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Player.idx = CONSTANTS.PLAYER_START_IDX
-	var item = Item.instance()
-	item.init("stick") # not _ready() for scene yet, not part of the root scene tree, still 'orphan' until I '.add_child()'
-	Inventory.addItem(item) # GUI render
-	Items.add_child(item) # WORLD render // DEBUG
+	
 	
 func _process(delta):
-	var moveRequestVelocity = Player.InputHandler()
+	var moveRequestVelocity = Player.MoveHandler()
+	var spawnRequest = Player.DEBUG_SpawnHandler()
 	
 	if moveRequestVelocity.length() != 0: # GAME TICK
 		MoveController.move(Map, Player, moveRequestVelocity)
+	
+	if spawnRequest:
+		spawnItem(Items, "stick", Vector2(Player.idx))
+
+# wip move InventoryController?
+func spawnItem(Items, itemString, idx):
+	var item = Item.instance()
+	item.init(itemString) # not _ready() for scene yet, not part of the root scene tree, still 'orphan' until I '.add_child()'
+	item.position = idx * CONSTANTS.GRID_SIZE
+	# Inventory.addItem(item) # GUI render
+	Items.add_child(item) # WORLD render // DEBUG
+	
+# WIP move InventoryController
+func grabItem():
+	pass
+# WIP move: InventoryController
+func dropItem():
+	pass
