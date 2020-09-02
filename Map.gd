@@ -49,7 +49,8 @@ func instantiateTerrain(terrainBlueprint):
 			node.position = Vector2(x, y) * CONSTANTS.GRID_SIZE
 			self.add_child(node)
 
-func isImpassable(terrainString) -> bool:
+func isImpassable(checkIdx) -> bool:
+	var terrainString = self.mapData[checkIdx.y][checkIdx.x]
 	if terrainString == "Rock":
 		return true
 	return false

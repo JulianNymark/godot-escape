@@ -12,7 +12,7 @@ func _ready():
 	Player.idx = CONSTANTS.PLAYER_START_IDX
 	
 func _process(delta):
-	var playerVelocity = Player.InputHandler()
+	var moveRequestVelocity = Player.InputHandler()
 	
-	if playerVelocity.length() != 0: # GAME TICK
-		MoveController.move(Map, Player, playerVelocity)
+	if moveRequestVelocity.length() != 0: # GAME TICK
+		MoveController.move(Map, Player, moveRequestVelocity)

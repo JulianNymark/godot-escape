@@ -12,7 +12,7 @@ script = ExtResource( 3 )
 [node name="MoveController" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[node name="FightingController" type="Node" parent="."]
+[node name="CombatController" type="Node" parent="."]
 
 [node name="World" type="Node2D" parent="."]
 position = Vector2( 32, 32 )

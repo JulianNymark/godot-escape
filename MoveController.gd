@@ -10,7 +10,7 @@ func move(map, movable, direction: Vector2):
 	if map.isOutOfBounds(nextIdx):
 		return
 	
-	if (map.isImpassable(map.mapData[nextIdx.y][nextIdx.x])):
+	if map.isImpassable(nextIdx):
 		return
 		
 	movable.idx = nextIdx
