@@ -27,7 +27,6 @@ script = ExtResource( 4 )
 position = Vector2( 256, 96 )
 
 [node name="Player" parent="World/Creatures" instance=ExtResource( 2 )]
-position = Vector2( 32, 32 )
 
 [node name="Items" type="Node2D" parent="World"]
 

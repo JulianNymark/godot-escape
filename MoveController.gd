@@ -13,5 +13,8 @@ func move(map, movable, direction: Vector2):
 	if map.isImpassable(nextIdx):
 		return
 		
-	movable.idx = nextIdx
+	setPos(movable, nextIdx)
+
+func setPos(movable, nextIdx):
+	movable.idx = nextIdx # index
 	movable.position = movable.idx * CONSTANTS.GRID_SIZE # render

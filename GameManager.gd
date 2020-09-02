@@ -12,8 +12,7 @@ onready var Items = $World/Items
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Player.idx = CONSTANTS.PLAYER_START_IDX
-	
+	MoveController.setPos(Player, CONSTANTS.PLAYER_START_IDX)
 	
 func _process(delta):
 	var moveRequestVelocity = Player.MoveHandler()
