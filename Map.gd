@@ -27,9 +27,9 @@ func generateMapBlueprint(dimensions):
 		toAdd = []
 		for l in range(dimensions.x):
 			if randf() > 0.9:
-				toAdd.append("Rock")
+				toAdd.append({"items": [], "terrain": "Rock"})
 			else:
-				toAdd.append("Grass")
+				toAdd.append({"items": [], "terrain": "Grass"})
 		generated.append(toAdd)
 	
 	return generated
@@ -40,9 +40,9 @@ func instantiateTerrain(terrainBlueprint):
 		for x in range(len(terrainBlueprint[0])):
 			
 			var node = null
-			if terrainBlueprint[y][x] == "Rock":
+			if terrainBlueprint[y][x].terrain == "Rock":
 				node = Rock.instance()
-			elif terrainBlueprint[y][x] == "Grass":
+			elif terrainBlueprint[y][x].terrain == "Grass":
 				node = Grass.instance()
 			else:
 				node = NoTexture.instance()
@@ -50,7 +50,7 @@ func instantiateTerrain(terrainBlueprint):
 			self.add_child(node)
 
 func isImpassable(checkIdx) -> bool:
-	var terrainString = self.mapData[checkIdx.y][checkIdx.x]
+	var terrainString = self.mapData[checkIdx.y][checkIdx.x].terrain
 	if terrainString == "Rock":
 		return true
 	return false

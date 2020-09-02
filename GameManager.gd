@@ -17,24 +17,33 @@ func _ready():
 func _process(delta):
 	var moveRequestVelocity = Player.MoveHandler()
 	var spawnRequest = Player.DEBUG_SpawnHandler()
+	var grabRequest = Player.DEBUG_GrabHandler()
 	
 	if moveRequestVelocity.length() != 0: # GAME TICK
 		MoveController.move(Map, Player, moveRequestVelocity)
 	
 	if spawnRequest:
-		spawnItem(Items, "stick", Vector2(Player.idx))
+		spawnItem(Items, Map, "stick", Vector2(Player.idx))
+	if grabRequest:
+		grabItem(Vector2(Player.idx))
 
 # wip move InventoryController?
-func spawnItem(Items, itemString, idx):
+func spawnItem(Items, Map, itemString, idx):
 	var item = Item.instance()
 	item.init(itemString) # not _ready() for scene yet, not part of the root scene tree, still 'orphan' until I '.add_child()'
-	item.position = idx * CONSTANTS.GRID_SIZE
+	MoveController.setPos(item, idx)
 	# Inventory.addItem(item) # GUI render
+	Map.mapData[idx.y][idx.x].items.append(item) # add to mapdata
 	Items.add_child(item) # WORLD render // DEBUG
 	
 # WIP move InventoryController
-func grabItem():
-	pass
+func grabItem(location: Vector2):
+	var itemsAtFeet = Map.mapData[location.y][location.x].items
+	if len(itemsAtFeet) > 0:
+		var item = itemsAtFeet.pop_back() # remove from mapdata
+		Items.remove_child(item)
+		Inventory.addItem(item)
+		
 # WIP move: InventoryController
 func dropItem():
 	pass

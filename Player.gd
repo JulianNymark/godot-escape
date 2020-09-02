@@ -44,3 +44,6 @@ func MoveHandler() -> Vector2:
 	
 func DEBUG_SpawnHandler():
 	return Input.is_action_just_pressed("key_s")
+
+func DEBUG_GrabHandler():
+	return Input.is_action_just_pressed("key_g")
