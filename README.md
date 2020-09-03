@@ -2,4 +2,4 @@
 using the ORIGINAL sprites from my first gamejam (2013)
 
 
-<img src="README/screenshot.jpeg"/>
+<img src="README/screenshot2.jpeg"/>
