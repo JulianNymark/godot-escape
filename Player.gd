@@ -50,3 +50,6 @@ func DEBUG_GrabHandler():
 
 func DEBUG_DropHandler():
 	return Input.is_action_just_pressed("key_d")
+	
+func DEBUG_ExitHandler():
+	return Input.is_action_just_pressed("ui_cancel")

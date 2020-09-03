@@ -21,6 +21,8 @@ func addItem(item):
 	self.add_child(button) # render in GUI
 
 func removeLastItem():
+	if len(self.items) == 0:
+		return null
 	var metaItem = self.items.pop_back()
 	self.remove_child(metaItem.button)
 	return metaItem.item
