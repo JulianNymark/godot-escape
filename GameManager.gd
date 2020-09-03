@@ -28,4 +28,3 @@ func _process(delta):
 		InventoryController.dropItem(Inventory, MoveController, Map, Items, Player.idx)
 	if Player.DEBUG_ExitHandler():
 		get_tree().quit()
-

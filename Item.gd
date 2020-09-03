@@ -5,12 +5,8 @@ onready var Sprite = $Sprite
 var textureToSet = null
 var idx = null
 
-const ItemTextures = {
-	"stick": preload("res://sprites/items/stick.png")
-}
-
-func init(itemString):
-	self.textureToSet = ItemTextures[itemString]
+func init(texture):
+	self.textureToSet = texture
 
 func _ready():
 	Sprite.texture = textureToSet
