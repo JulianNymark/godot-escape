@@ -47,3 +47,6 @@ func DEBUG_SpawnHandler():
 
 func DEBUG_GrabHandler():
 	return Input.is_action_just_pressed("key_g")
+
+func DEBUG_DropHandler():
+	return Input.is_action_just_pressed("key_d")

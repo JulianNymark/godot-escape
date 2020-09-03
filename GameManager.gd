@@ -18,32 +18,38 @@ func _process(delta):
 	var moveRequestVelocity = Player.MoveHandler()
 	var spawnRequest = Player.DEBUG_SpawnHandler()
 	var grabRequest = Player.DEBUG_GrabHandler()
+	var dropRequest = Player.DEBUG_DropHandler()
 	
 	if moveRequestVelocity.length() != 0: # GAME TICK
 		MoveController.move(Map, Player, moveRequestVelocity)
 	
 	if spawnRequest:
-		spawnItem(Items, Map, "stick", Vector2(Player.idx))
+		spawnItem(Items, Map, "stick", Player.idx)
 	if grabRequest:
-		grabItem(Vector2(Player.idx))
+		grabItem(Items, Map, Player.idx)
+	if dropRequest:
+		dropItem()
 
-# wip move InventoryController?
+# wip move InventoryController? // DEBUG
 func spawnItem(Items, Map, itemString, idx):
 	var item = Item.instance()
 	item.init(itemString) # not _ready() for scene yet, not part of the root scene tree, still 'orphan' until I '.add_child()'
 	MoveController.setPos(item, idx)
-	# Inventory.addItem(item) # GUI render
 	Map.mapData[idx.y][idx.x].items.append(item) # add to mapdata
-	Items.add_child(item) # WORLD render // DEBUG
+	Items.add_child(item) # WORLD render
 	
 # WIP move InventoryController
-func grabItem(location: Vector2):
-	var itemsAtFeet = Map.mapData[location.y][location.x].items
+func grabItem(Items, Map, locationIdx: Vector2):
+	var itemsAtFeet = Map.mapData[locationIdx.y][locationIdx.x].items
 	if len(itemsAtFeet) > 0:
 		var item = itemsAtFeet.pop_back() # remove from mapdata
-		Items.remove_child(item)
-		Inventory.addItem(item)
+		Items.remove_child(item) # remove from world render
+		Inventory.addItem(item) # add to Inv (add to inv data + inv render)
 		
 # WIP move: InventoryController
 func dropItem():
-	pass
+	var item = Inventory.removeLastItem()
+	var idx = Player.idx
+	MoveController.setPos(item, idx)
+	Map.mapData[idx.y][idx.x].items.append(item) # add to mapdata
+	Items.add_child(item) # WORLD render

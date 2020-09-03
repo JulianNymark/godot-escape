@@ -5,7 +5,6 @@ const limit = 20
 var items = []
 
 func addItem(item):
-	print("item: ", item)
 	if len(items) >= limit:
 		print("inventory full")
 		return
@@ -20,3 +19,8 @@ func addItem(item):
 	
 	items.append(metaItem) # internal data ref
 	self.add_child(button) # render in GUI
+
+func removeLastItem():
+	var metaItem = self.items.pop_back()
+	self.remove_child(metaItem.button)
+	return metaItem.item
