@@ -27,19 +27,30 @@ func handleAnimation(direction):
 
 func MoveHandler() -> Vector2:
 	velocity = Vector2(0, 0)
-	if (Input.is_action_just_pressed("ui_up")):
+	if (Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("key_k")):
 		facing = Cardinals.N
 		velocity = Vector2(0, -1)
-	elif (Input.is_action_just_pressed("ui_down")):
+	elif (Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("key_j")):
 		facing = Cardinals.S
 		velocity = Vector2(0, 1)
-	elif (Input.is_action_just_pressed("ui_left")):
+	elif (Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("key_h")):
 		facing = Cardinals.W
 		velocity = Vector2(-1, 0)
-	elif (Input.is_action_just_pressed("ui_right")):
+	elif (Input.is_action_just_pressed("ui_right") or Input.is_action_just_pressed("key_l")):
 		facing = Cardinals.E
 		velocity = Vector2(1, 0)
-	
+	elif Input.is_action_just_pressed("key_y"):
+		facing = Cardinals.N
+		velocity = Vector2(-1, -1)
+	elif Input.is_action_just_pressed("key_u"):
+		facing = Cardinals.N
+		velocity = Vector2(1, -1)
+	elif Input.is_action_just_pressed("key_b"):
+		facing = Cardinals.S
+		velocity = Vector2(-1, 1)
+	elif Input.is_action_just_pressed("key_n"):
+		facing = Cardinals.S
+		velocity = Vector2(1, 1)	
 	return velocity
 	
 func DEBUG_SpawnHandler():
