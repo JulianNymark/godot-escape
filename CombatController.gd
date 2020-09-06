@@ -3,6 +3,7 @@ extends Node
 func attack(PlayerHealth, Earth, Creatures, Attacker, idx):
 	var target = Earth.mapData[idx.y][idx.x].creature
 	var isPlayerAttacking = Attacker.creatureName == "Player"
+	var isPlayerTarget = target.creatureName == "Player"
 	
 	var strikeAccuracy = randf()
 	var strikeStrength = Attacker.strength
@@ -46,6 +47,15 @@ func attack(PlayerHealth, Earth, Creatures, Attacker, idx):
 		if grazing:
 			hitString = "graze"
 		print("you %s the %s for %d damage!" % [hitString, target.creatureName, damage])
+	elif isPlayerTarget:
+		var hitString = "strikes"
+		if critical:
+			hitString = "DEMOLISHES"
+		if miss:
+			hitString = "misses"
+		if grazing:
+			hitString = "grazes"
+		print("%s %s you for %d damage!" % [target.creatureName, hitString, damage])
 	else:
 		var hitString = "strikes"
 		if critical:
@@ -54,10 +64,10 @@ func attack(PlayerHealth, Earth, Creatures, Attacker, idx):
 			hitString = "misses"
 		if grazing:
 			hitString = "grazes"
-			
-		print("%s %s you for %d damage!" % [target.creatureName, hitString, damage])
+		print("%s %s the %s for %d damage!" % [Attacker.creatureName, hitString, target.creatureName, damage])
 
-	if target.creatureName == "Player":
+
+	if isPlayerTarget:
 		PlayerHealth.setHealth(target.health)
 
 	if target.health <= 0:

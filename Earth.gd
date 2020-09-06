@@ -56,7 +56,7 @@ func instantiateTerrain(terrainBlueprint):
 func instantiateCreatures():
 	for i in range(DIM.y):
 		for l in range(DIM.x):
-			if randf() >= 0.9:
+			if randf() >= 0.7:
 				Creatures.spawnCreature(self, "bat", Vector2(l, i))
 
 func isImpassable(checkIdx) -> bool:
