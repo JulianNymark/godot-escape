@@ -1,13 +1,13 @@
 extends Node
 
 # DEBUG
-func spawnItem(MoveController, Map, Items, itemString, idx: Vector2):
+func spawnItem(MoveController, Earth, Items, itemString, idx: Vector2):
 	var item = Items.spawnRandomItem(idx)
-	Map.mapData[idx.y][idx.x].items.append(item) # add to mapdata
+	Earth.mapData[idx.y][idx.x].items.append(item) # add to mapdata
 	Items.add_child(item) # WORLD render
 	
-func grabItem(Inventory, Map, Items, idx: Vector2):
-	var itemsAtFeet = Map.mapData[idx.y][idx.x].items
+func grabItem(Inventory, Earth, Items, idx: Vector2):
+	var itemsAtFeet = Earth.mapData[idx.y][idx.x].items
 	if len(itemsAtFeet) > 0:
 		var item = itemsAtFeet.pop_back() # remove from mapdata
 		if Inventory.isFull():
@@ -17,11 +17,11 @@ func grabItem(Inventory, Map, Items, idx: Vector2):
 		Inventory.addItem(item) # add to Inv (add to inv data + inv render)
 	else:
 		print("you grab at the empty air")
-func dropItem(Inventory, MoveController, Map, Items, idx: Vector2):
+func dropItem(Inventory, MoveController, Earth, Items, idx: Vector2):
 	if Inventory.isEmpty():
 		print("your inventory is empty")
 		return
 	var item = Inventory.removeLastItem()
 	MoveController.setPos(item, idx)
-	Map.mapData[idx.y][idx.x].items.append(item) # add to mapdata
+	Earth.mapData[idx.y][idx.x].items.append(item) # add to mapdata
 	Items.add_child(item) # WORLD render

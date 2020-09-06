@@ -5,7 +5,7 @@ const CONSTANTS = preload("constants.gd")
 onready var MoveController = $MoveController
 onready var FightingController = $FightingController
 onready var InventoryController = $InventoryController
-onready var Map = $Earth/Map
+onready var Earth = $Earth
 onready var Items = $Earth/Items
 onready var Player = $Earth/Creatures/Player
 onready var Inventory = $GUI/InventoryBG/Inventory
@@ -18,13 +18,14 @@ func _process(delta):
 	var moveRequestVelocity = Player.MoveHandler()
 	
 	if moveRequestVelocity.length() != 0: # GAME TICK
-		MoveController.move(Map, Player, moveRequestVelocity)
+		MoveController.move(Earth, Player, moveRequestVelocity)
+		# for each creature, calculate intent & action
 	
 	if Player.DEBUG_SpawnHandler():
-		InventoryController.spawnItem(MoveController, Map, Items, "stick", Player.idx)
+		InventoryController.spawnItem(MoveController, Earth, Items, "stick", Player.idx)
 	if Player.DEBUG_GrabHandler():
-		InventoryController.grabItem(Inventory, Map, Items, Player.idx)
+		InventoryController.grabItem(Inventory, Earth, Items, Player.idx)
 	if Player.DEBUG_DropHandler():
-		InventoryController.dropItem(Inventory, MoveController, Map, Items, Player.idx)
+		InventoryController.dropItem(Inventory, MoveController, Earth, Items, Player.idx)
 	if Player.DEBUG_ExitHandler():
 		get_tree().quit()

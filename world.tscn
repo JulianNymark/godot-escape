@@ -21,9 +21,9 @@ script = ExtResource( 5 )
 
 [node name="Earth" type="Node2D" parent="."]
 position = Vector2( 32, 32 )
+script = ExtResource( 4 )
 
 [node name="Map" type="YSort" parent="Earth"]
-script = ExtResource( 4 )
 
 [node name="Creatures" type="YSort" parent="Earth"]
 

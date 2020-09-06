@@ -1,4 +1,4 @@
-extends YSort
+extends Node2D
 
 const Rock = preload("Terrain/Rock.tscn")
 const Grass = preload("Terrain/Grass.tscn")
@@ -6,6 +6,8 @@ const NoTexture = preload("Terrain/NoTexture.tscn")
 
 const CONSTANTS = preload("constants.gd")
 const DIM = Vector2(10,10)
+
+onready var Map = $Map
 
 var mapData = null
 
@@ -47,7 +49,7 @@ func instantiateTerrain(terrainBlueprint):
 			else:
 				node = NoTexture.instance()
 			node.position = Vector2(x, y) * CONSTANTS.GRID_SIZE
-			self.add_child(node)
+			self.Map.add_child(node)
 
 func isImpassable(checkIdx) -> bool:
 	var terrainString = self.mapData[checkIdx.y][checkIdx.x].terrain
