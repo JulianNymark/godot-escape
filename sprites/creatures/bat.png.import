@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bat.jpg-6e7ea3a1884d9a87a47c2ad450c0307b.stex"
+path="res://.import/bat.png-7ba877c5fa0e1448456b2a89bcdf8900.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/creatures/bat.jpg"
-dest_files=[ "res://.import/bat.jpg-6e7ea3a1884d9a87a47c2ad450c0307b.stex" ]
+source_file="res://sprites/creatures/bat.png"
+dest_files=[ "res://.import/bat.png-7ba877c5fa0e1448456b2a89bcdf8900.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

@@ -1,8 +1,8 @@
 extends Node
 
 # DEBUG
-func spawnItem(MoveController, Earth, Items, itemString, idx: Vector2):
-	var item = Items.spawnRandomItem(idx)
+func spawnItem(Earth, Items, itemString, idx: Vector2):
+	var item = Items.spawnRandomItem(Earth, idx)
 	Earth.mapData[idx.y][idx.x].items.append(item) # add to mapdata
 	Items.add_child(item) # WORLD render
 	
@@ -22,6 +22,6 @@ func dropItem(Inventory, MoveController, Earth, Items, idx: Vector2):
 		print("your inventory is empty")
 		return
 	var item = Inventory.removeLastItem()
-	MoveController.setPos(item, idx)
+	MoveController.setPos(Earth, item, idx)
 	Earth.mapData[idx.y][idx.x].items.append(item) # add to mapdata
 	Items.add_child(item) # WORLD render

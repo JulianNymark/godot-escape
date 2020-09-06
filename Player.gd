@@ -8,6 +8,10 @@ var animationPlayer = null
 var facing = Cardinals.S
 var velocity = null
 var idx = null
+var creatureName = "Player"
+var strength = 8
+var health = 20
+var armor = 0
 
 func _ready():
 	animationPlayer = $AnimationPlayer

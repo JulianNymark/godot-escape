@@ -8,6 +8,7 @@ const CONSTANTS = preload("constants.gd")
 const DIM = Vector2(10,10)
 
 onready var Map = $Map
+onready var Creatures = $Creatures
 
 var mapData = null
 
@@ -16,6 +17,7 @@ func _ready():
 	randomize()
 	mapData = generateMapBlueprint(DIM)
 	instantiateTerrain(mapData)
+	instantiateCreatures()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -29,9 +31,9 @@ func generateMapBlueprint(dimensions):
 		toAdd = []
 		for l in range(dimensions.x):
 			if randf() > 0.9:
-				toAdd.append({"items": [], "terrain": "Rock"})
+				toAdd.append({"items": [], "creature": null, "terrain": "Rock"})
 			else:
-				toAdd.append({"items": [], "terrain": "Grass"})
+				toAdd.append({"items": [], "creature": null, "terrain": "Grass"})
 		generated.append(toAdd)
 	
 	return generated
@@ -50,16 +52,28 @@ func instantiateTerrain(terrainBlueprint):
 				node = NoTexture.instance()
 			node.position = Vector2(x, y) * CONSTANTS.GRID_SIZE
 			self.Map.add_child(node)
+			
+func instantiateCreatures():
+	for i in range(DIM.y):
+		for l in range(DIM.x):
+			if randf() >= 0.9:
+				Creatures.spawnCreature(self, "bat", Vector2(l, i))
 
 func isImpassable(checkIdx) -> bool:
-	var terrainString = self.mapData[checkIdx.y][checkIdx.x].terrain
-	if terrainString == "Rock":
+	var tileData = self.mapData[checkIdx.y][checkIdx.x]
+	if tileData.terrain == "Rock":
 		return true
+	
 	return false
 
 func isOutOfBounds(idx: Vector2) -> bool:
 	if idx.x < 0 or idx.x >= self.DIM.x:
 		return true
 	if idx.y < 0 or idx.y >= self.DIM.y:
+		return true
+	return false
+
+func isCreature(idx: Vector2) -> bool:
+	if self.mapData[idx.y][idx.x].creature:
 		return true
 	return false

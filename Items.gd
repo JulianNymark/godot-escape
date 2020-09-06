@@ -17,9 +17,9 @@ func _ready():
 	for itemString in itemStrings:
 		loadTexture(itemString)
 
-func spawnRandomItem(idx):
+func spawnRandomItem(Earth, idx):
 	var rIdx = randi() % len(itemStrings)
 	var item = Item.instance()
 	item.init(self.ItemTextures[itemStrings[rIdx]])
-	MoveController.setPos(item, idx)
+	MoveController.setPos(Earth, item, idx)
 	return item
